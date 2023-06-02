@@ -6,9 +6,9 @@ import time
 
 #her definerer vi variabler som bruker navn til servern vi skal koble oss til 
 TARGET_IP = input("skriv in ip-en her: ")
-BRUKERNAVN = "vetle"
+BRUKERNAVN = input("skriv inn brukernav")
 SSH_PORT = 22
-PASSORD = "changeme"
+PASSORD = input("skriv inn passord")
 
 
 # her setter vi opp en ssh connection 
@@ -57,4 +57,4 @@ while True:
         ssh_client.close()
 
     #vent 60 sekunder for den kjører while løkken på nytt
-    time.sleep(60)
+    time.sleep(60) 
