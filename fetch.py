@@ -28,7 +28,7 @@ while True:
             "uptime",  # Server tid oppe
             "free -h",  # hvor mye minne som blir brukt
             "df -h",  # disk plass 
-            "top -i"  # cpu prosess
+            "top -b -n 1 | head -n 20"  # cpu prosess
         ]
 
         for kommando in koammandoer:
