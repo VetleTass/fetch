@@ -9,12 +9,7 @@ TARGET_IP = input("skriv in ip-en her: ")
 BRUKERNAVN = "vetle"
 SSH_PORT = 22
 PASSORD = "changeme"
-koammandoer = [
-    "uptime",  # Server tid oppe
-    "free -m",  # hvor mye minne som blir brukt
-    "df -h",  # disk plass 
-    "top -i"  # cpu prosess
-]
+
 
 # her setter vi opp en ssh connection 
 ssh_client = paramiko.SSHClient()
@@ -28,7 +23,38 @@ while True:
         # her kobler vi oss til ipen og ssh porten med bruker navn og passord 
         ssh_client.connect(TARGET_IP, SSH_PORT, BRUKERNAVN, PASSORD)
         
+        koammandoer = [
+            "uptime",  # Server tid oppe
+            "free -m",  # hvor mye minne som blir brukt
+            "df -h",  # disk plass 
+            "top -i"  # cpu prosess
+        ]
+
+        for kommando in koammandoer:
+            #her bruker vi kommandoene vi har skrevet
+            stdin, stdout, stderr = ssh_client.exec_command(kommando)
+            #dekrypterer det vi har fått ut fra kommandoen 
+            uttak = stdout.read().decode().strip()
+            #printer kommadoen som blir brukt
+            print(f"kommandoen: {kommando}\n")
+            #printer outpout av kommandoen, altså det som har blitt dekryptert
+            print(uttak)
+
+
     # denne her legger vi til i tilfelle noe går galt så ser vi hvor det skjedde 
+    #feil i brukernavn og/eller passord 
     except paramiko.AuthenticationException:
         print("bruker navn og/eller passord er feil")
+    #feil i ssh 
+    except paramiko.SSHException as ssh_feil:
+        print(f"det oppsto en feil i ssh{str(ssh_feil)}")
+    #bare en feil generelt som ikke er knyttet til ssh eller brukernavn/passord
+    except paramiko.Exception as feil:
+        print(f"det oppsto ett problem {str(feil)}")
     
+    finally:
+        #stenger ssh kobling 
+        ssh_client.close()
+
+    #vent 60 sekunder for den kjører while løkken på nytt
+    time.sleep(60)
