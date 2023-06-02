@@ -51,7 +51,7 @@ while True:
     except paramiko.SSHException as ssh_feil:
         print(f"det oppsto en feil i ssh{str(ssh_feil)}")
     #bare en feil generelt som ikke er knyttet til ssh eller brukernavn/passord
-    except paramiko.Exception as feil:
+    except Exception as feil:
         print(f"det oppsto ett problem {str(feil)}")
     
     finally:
