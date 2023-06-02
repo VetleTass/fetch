@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-#importer bibloteker som jeg trenger i koden.
+#importer bibloteker som jeg trenger i knanao oden.
 import paramiko
 import time
 
@@ -20,6 +20,3 @@ koammandoer = [
 ssh_client = paramiko.SSHClient()
 #her tar vi å auto godkjenner når vi ssh'er 
 ssh_client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-
-
-dabwgdbafhgauifb fhjawhbh nhfaoiwf
