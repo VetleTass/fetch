@@ -20,3 +20,6 @@ koammandoer = [
 ssh_client = paramiko.SSHClient()
 #her tar vi å auto godkjenner når vi ssh'er 
 ssh_client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+
+
+dabwgdbafhgauifb fhjawhbh nhfaoiwf
