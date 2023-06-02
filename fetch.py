@@ -3,12 +3,13 @@
 #importer bibloteker som jeg trenger i knanao oden.
 import paramiko
 import time
+import getpass
 
 #her definerer vi variabler som bruker navn til servern vi skal koble oss til 
 TARGET_IP = input("skriv in ip-en her: ")
-BRUKERNAVN = input("skriv inn brukernav")
+BRUKERNAVN = input("skriv inn brukernav: ")
 SSH_PORT = 22
-PASSORD = input("skriv inn passord")
+PASSORD = getpass.getpass("skriv inn passord: ")
 
 
 # her setter vi opp en ssh connection 
@@ -25,7 +26,7 @@ while True:
         
         koammandoer = [
             "uptime",  # Server tid oppe
-            "free -m",  # hvor mye minne som blir brukt
+            "free -h",  # hvor mye minne som blir brukt
             "df -h",  # disk plass 
             "top -i"  # cpu prosess
         ]
@@ -39,7 +40,8 @@ while True:
             print(f"kommandoen: {kommando}\n")
             #printer outpout av kommandoen, altså det som har blitt dekryptert
             print(uttak)
-
+            #legger til en ny linje for hver kommando sånn at det ikke skal bli så masete å se på
+            print("----------------------------------\n")
 
     # denne her legger vi til i tilfelle noe går galt så ser vi hvor det skjedde 
     #feil i brukernavn og/eller passord 
